@@ -24,30 +24,59 @@
   <!-- Main CSS -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    (function () {
-      emailjs.init("bNs_OpK0HIWQ4dSOt"); // ✅ Replace with your EmailJS Public Key
-    })();
-  </script>
-
-  <!-- Smooth Scroll CSS -->
+  <!-- ✅ Preloader CSS -->
   <style>
-    html {
-      scroll-behavior: smooth; /* enables smooth scroll for anchor links */
+    #preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.6s ease;
     }
+    #preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #28a745;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px; /* ✅ fixed */
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    html { scroll-behavior: smooth; } 
   </style>
 </head>
 
-<body class="index-page">
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
 
-  <!-- Contact Section -->
+  <!-- ===== Contact Section ===== -->
   <section id="contact" class="contact">
-    <div class="container">
-      <div class="row gy-5 gx-lg-5">
+    <div class="container" data-aos="fade-up">
 
-        <!-- Contact Info Column -->
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Home / Contact Us</p>
+      </div>
+
+      <div class="row">
+        <!-- Contact Info -->
         <div class="col-lg-4">
           <div class="info">
             <h3>Better yet, see us in person!</h3>
@@ -81,18 +110,16 @@
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
                 <h4>Location:</h4>
-                <div style="width: 100%">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.6529377216925!2d121.0697220757416!3d14.618836176628692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b7724ed5b74f%3A0xa8f6dbe94a8f3d1d!2sEcozmart%20Ventures%20Incorporated!5e0!3m2!1sen!2sph!4v1742753273257!5m2!1sen!2sph"
-                    width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-                  </iframe>
-                </div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.6529377216925!2d121.0697220757416!3d14.618836176628692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b7724ed5b74f%3A0xa8f6dbe94a8f3d1d!2sEcozmart%20Ventures%20Incorporated!5e0!3m2!1sen!2sph!4v1742753273257!5m2!1sen!2sph"
+                  width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Contact Form Column -->
+        <!-- Contact Form -->
         <div class="col-lg-8">
           <form id="contact-form" class="php-email-form">
             <div class="row">
@@ -109,8 +136,7 @@
             <div class="form-group mb-3">
               <textarea name="message" id="message" rows="5" class="form-control" placeholder="Message"></textarea>
             </div>
-
-            <!-- Feedback Messages -->
+            <!-- Feedback -->
             <div class="loading text-center my-2" style="display:none;">Loading...</div>
             <div class="error-message alert alert-danger mt-2" style="display:none;"></div>
             <div class="sent-message alert alert-success mt-2" style="display:none;">✅ Your message has been sent!</div>
@@ -125,7 +151,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== Footer ===== -->
   <footer id="footer" class="footer light-background pt-5 pb-4">
     <div class="container">
       <div class="row g-4">
@@ -134,13 +160,8 @@
         <div class="col-md-6 col-lg-3 mb-3 mb-md-0">
           <div class="widget">
             <h3 class="widget-heading">Address:</h3>
-            <p class="mb-4">
-              2nd Floor JSO Building, 210 Katipunan Avenue, Blue Ridge A, Quezon City
-            </p>
-            <p class="mb-0">
-              <!-- smooth scroll link -->
-              <a href="#contact" class="btn-learn-more">Contact Us</a>
-            </p>
+            <p class="mb-4">2nd Floor JSO Building, 210 Katipunan Avenue, Blue Ridge A, Quezon City</p>
+            <p class="mb-0"><a href="#contact" class="btn-learn-more">Contact Us</a></p>
           </div>
         </div>
 
@@ -175,21 +196,12 @@
         </div>
 
         <!-- Office Hours -->
-        <div class="col-md-6 col-lg-3 ps-lg-5 mb-3 mb-md-0">
-          <div class="widget">
-            <div class="footer-subscribe">
-              <h3 class="widget-heading">Office Hours</h3>
-              <p class="mb-4">
-                Monday to Friday - 9:00am to 5:00pm<br>
-                Saturday - 9:00am to 12:00pm
-              </p>
-            </div>
-          </div>
+        <div class="col-md-6 col-lg-3">
+          <h3>Office Hours</h3>
+          <p>Monday-Friday: 9:00am - 5:00pm<br>Sat: 9:00am - 12:00</p>
         </div>
-
       </div>
 
-      <!-- Footer Bottom -->
       <div class="row mt-4">
         <div class="col-12 text-center">
           <p class="mb-0">&copy; 2025 Ecozmart Ventures Inc. All Rights Reserved.</p>
@@ -198,24 +210,41 @@
     </div>
   </footer>
 
-  <!-- JS Files -->
+  <!-- Vendor JS -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- EmailJS Form Script -->
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function () {
+      emailjs.init("RbjuLX-z4wcc9JLuc"); // ✅ your public key
+    })();
+  </script>
+
+  <!-- Preloader Script -->
+  <script>
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.classList.add("fade-out");
+        setTimeout(() => preloader.remove(), 600);
+      }
+    });
+  </script>
+
+  <!-- Contact Form Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("contact-form");
       const loading = document.querySelector(".loading");
       const errorBox = document.querySelector(".error-message");
       const successBox = document.querySelector(".sent-message");
       const sendBtn = document.getElementById("send-btn");
       const btnText = document.getElementById("btn-text");
-
-      form.addEventListener("submit", function(e) {
+    }
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         let name = document.getElementById("name").value.trim();
@@ -249,7 +278,7 @@
           subject: subject,
           message: message
         })
-        .then(function() {
+        .then(() => {
           loading.style.display = "none";
           successBox.style.display = "block";
           sendBtn.classList.remove("btn-primary");
@@ -265,7 +294,7 @@
             sendBtn.disabled = false;
           }, 4000);
         })
-        .catch(function(error) {
+        .catch((error) => {
           loading.style.display = "none";
           errorBox.textContent = "⚠️ Failed to send. Please try again.";
           errorBox.style.display = "block";
@@ -273,13 +302,10 @@
           sendBtn.disabled = false;
           console.error("EmailJS Error:", error);
 
-          setTimeout(() => {
-            errorBox.style.display = "none";
-          }, 4000);
+          setTimeout(() => { errorBox.style.display = "none"; }, 4000);
         });
       });
     });
   </script>
-
 </body>
 </html>
